@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from './supabaseClient';
-import { Dumbbell } from 'lucide-react';
+import { Crown } from 'lucide-react';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -28,10 +28,10 @@ export default function Auth() {
     <div className="auth-screen">
       <div className="auth-card">
         <div className="auth-logo">
-          <Dumbbell size={28} />
+          <Crown size={30} strokeWidth={1.5} />
         </div>
-        <h1 className="font-display auth-title">IRON LOG</h1>
-        <p className="auth-subtitle">catat. angkat. ulangi.</p>
+        <h1 className="font-display auth-title">BUL-KINGS</h1>
+        <p className="auth-subtitle">disiplin adalah mahkota</p>
 
         {status === 'sent' ? (
           <div className="auth-sent">

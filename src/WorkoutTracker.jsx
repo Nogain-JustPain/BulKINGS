@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut, Crown } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { supabase } from './supabaseClient';
 
@@ -534,9 +534,12 @@ export default function WorkoutTracker({ session }) {
     <div className="iron-log font-body">
       <div className="container">
         <header className="header">
-          <div>
-            <h1 className="font-display title">IRON LOG</h1>
-            <p className="subtitle">{userEmail}</p>
+          <div className="header-brand">
+            <Crown size={22} strokeWidth={1.5} className="crown-mark" />
+            <div>
+              <h1 className="font-display title">BUL-KINGS</h1>
+              <p className="subtitle">{userEmail}</p>
+            </div>
           </div>
           <div className="header-right">
             <div className="header-stat">
@@ -544,10 +547,11 @@ export default function WorkoutTracker({ session }) {
               <span className="header-stat-label">sesi</span>
             </div>
             <button className="icon-btn" onClick={handleLogout} aria-label="Keluar" title="Keluar">
-              <LogOut size={18} />
+              <LogOut size={17} strokeWidth={1.75} />
             </button>
           </div>
         </header>
+        <div className="header-divider"></div>
 
         <nav className="tabs">
           <button className={`tab ${tab === 'log' ? 'tab-active' : ''}`} onClick={() => setTab('log')}>
