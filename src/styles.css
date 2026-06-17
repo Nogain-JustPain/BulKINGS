@@ -9,6 +9,11 @@ html, body, #root {
 
 body {
   background: #FAFAF7;
+  transition: background 0.2s;
+}
+
+body[data-theme="dark"] {
+  background: #15140F;
 }
 
 .iron-log {
@@ -33,7 +38,31 @@ body {
   min-height: 100vh;
   width: 100%;
   color-scheme: light;
+  transition: background 0.2s, color 0.2s;
 }
+
+.iron-log[data-theme="dark"] {
+  /* Dark variant — same luxury identity, deep charcoal ground, warmer gold */
+  --bg: #15140F;
+  --surface: #1E1C16;
+  --surface-alt: #262319;
+  --border: #38352A;
+  --border-strong: #4A4636;
+  --text: #F2EFE6;
+  --text-muted: #9B978A;
+  --accent: #B5B0A0;
+  --accent-strong: #D8D3C2;
+  --accent-soft: rgba(181, 176, 160, 0.10);
+  --gold: #D4A75C;
+  --gold-soft: rgba(212, 167, 92, 0.14);
+  --danger: #D2685C;
+  --danger-soft: rgba(210, 104, 92, 0.12);
+  color-scheme: dark;
+}
+
+.iron-log[data-theme="dark"] .stepper-input { color: var(--text); }
+.iron-log[data-theme="dark"] .metric-active { color: var(--bg); }
+.iron-log[data-theme="dark"] .btn-primary { color: var(--bg); }
 
 .font-display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: 0.01em; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -193,30 +222,39 @@ body {
 .chart-title { font-size: 15px; font-weight: 500; margin: 0 0 10px 10px; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; }
 .chart-wrap { width: 100%; }
 
-.loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #84827A; background: #FAFAF7; font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
+.loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; color: var(--text-muted, #84827A); background: var(--bg, #FAFAF7); font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
 
 /* Auth screen */
 .auth-screen {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  background: #FAFAF7; padding: 20px; font-family: 'Inter', sans-serif;
+  background: var(--bg); padding: 20px; font-family: 'Inter', sans-serif;
+  position: relative;
 }
+.auth-theme-toggle { position: absolute; top: 20px; right: 20px; }
 .auth-card {
-  width: 100%; max-width: 380px; background: #FFFFFF; border: 1px solid #E3E1D9;
+  width: 100%; max-width: 380px; background: var(--surface); border: 1px solid var(--border);
   border-radius: 6px; padding: 40px 32px; text-align: center;
 }
 .auth-logo {
   width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 18px; color: #B68F56;
+  margin: 0 auto 18px; color: var(--gold);
 }
-.auth-title { font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: 0.05em; font-size: 26px; color: #1C1C1A; margin: 0; }
-.auth-subtitle { font-size: 12px; color: #84827A; margin: 6px 0 28px; letter-spacing: 0.02em; }
+.auth-title { font-family: 'Fraunces', serif; font-weight: 500; letter-spacing: 0.05em; font-size: 26px; color: var(--text); margin: 0; }
+.auth-subtitle { font-size: 12px; color: var(--text-muted); margin: 6px 0 28px; letter-spacing: 0.02em; }
 .auth-form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
 .auth-form .field-label { margin-bottom: 0; }
-.auth-error { color: #A8443A; font-size: 13px; margin: 0; }
-.auth-note { font-size: 11px; color: #84827A; margin: 10px 0 0; text-align: center; line-height: 1.6; }
-.auth-sent { color: #1C1C1A; font-size: 14px; line-height: 1.6; }
+.auth-error { color: var(--danger); font-size: 13px; margin: 0; }
+.auth-note { font-size: 11px; color: var(--text-muted); margin: 10px 0 0; text-align: center; line-height: 1.6; }
+.auth-sent { color: var(--text); font-size: 14px; line-height: 1.6; }
 .auth-sent p { margin: 0 0 10px; }
-.auth-sent-sub { color: #84827A; font-size: 13px; }
+.auth-sent-sub { color: var(--text-muted); font-size: 13px; }
+
+.theme-toggle {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+  color: var(--text-muted); width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; transition: color 0.15s, border-color 0.15s;
+}
+.theme-toggle:hover { color: var(--gold); border-color: var(--gold); }
 
 @media (max-width: 380px) {
   .title { font-size: 25px; }

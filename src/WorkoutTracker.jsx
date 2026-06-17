@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut, Crown } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut, Crown, Sun, Moon } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { supabase } from './supabaseClient';
 
@@ -301,7 +301,7 @@ function ProgressTabView({ exercisesWithData, selectedExercise, setSelectedExerc
   );
 }
 
-export default function WorkoutTracker({ session }) {
+export default function WorkoutTracker({ session, theme, toggleTheme }) {
   const userId = session.user.id;
   const userEmail = session.user.email;
 
@@ -527,11 +527,15 @@ export default function WorkoutTracker({ session }) {
   };
 
   if (!loaded) {
-    return <div className="loading-screen">Memuat data...</div>;
+    return (
+      <div className="iron-log font-body" data-theme={theme}>
+        <div className="loading-screen">Memuat data...</div>
+      </div>
+    );
   }
 
   return (
-    <div className="iron-log font-body">
+    <div className="iron-log font-body" data-theme={theme}>
       <div className="container">
         <header className="header">
           <div className="header-brand">
@@ -546,6 +550,9 @@ export default function WorkoutTracker({ session }) {
               <span className="font-display header-stat-num">{sessions.length}</span>
               <span className="header-stat-label">sesi</span>
             </div>
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Ganti tema" title="Ganti tema">
+              {theme === 'dark' ? <Sun size={15} strokeWidth={1.75} /> : <Moon size={15} strokeWidth={1.75} />}
+            </button>
             <button className="icon-btn" onClick={handleLogout} aria-label="Keluar" title="Keluar">
               <LogOut size={17} strokeWidth={1.75} />
             </button>
