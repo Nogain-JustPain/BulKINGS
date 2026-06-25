@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut, Crown, Sun, Moon, Settings, Pencil } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, Dumbbell, History as HistoryIcon, TrendingUp, X, Minus, LogOut, Crown, Sun, Moon, Settings, Pencil, Scale, BarChart2 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { supabase } from './supabaseClient';
+import BodyWeightTab from './BodyWeightTab.jsx';
+import WeeklyTab from './WeeklyTab.jsx';
 
 const COMMON_EXERCISES = [
   'Bench Press', 'Squat', 'Deadlift', 'Overhead Press', 'Barbell Row',
@@ -787,6 +789,12 @@ export default function WorkoutTracker({ session, theme, toggleTheme, username, 
           <button className={`tab ${tab === 'progress' ? 'tab-active' : ''}`} onClick={() => setTab('progress')}>
             <TrendingUp size={16} /> Progress
           </button>
+          <button className={`tab ${tab === 'berat' ? 'tab-active' : ''}`} onClick={() => setTab('berat')}>
+            <Scale size={16} /> Berat
+          </button>
+          <button className={`tab ${tab === 'weekly' ? 'tab-active' : ''}`} onClick={() => setTab('weekly')}>
+            <BarChart2 size={16} /> Weekly
+          </button>
         </nav>
 
         {statusMsg && (
@@ -827,6 +835,12 @@ export default function WorkoutTracker({ session, theme, toggleTheme, username, 
               metric={metric} setMetric={setMetric}
               progressData={progressData} stats={stats}
             />
+          )}
+          {tab === 'berat' && (
+            <BodyWeightTab userId={userId} />
+          )}
+          {tab === 'weekly' && (
+            <WeeklyTab userId={userId} />
           )}
         </main>
       </div>
